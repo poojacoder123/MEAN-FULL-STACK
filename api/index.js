@@ -1,9 +1,10 @@
 import express from 'express';
 import mongoose, { connect } from 'mongoose';
 import dotenv from 'dotenv';
+import routes from './routes/roleRoutes.js';
 const app = express();
 dotenv.config()
-
+app.use(express.json());
 
 const mongoDB = async ()=>{
     try {
@@ -14,6 +15,8 @@ const mongoDB = async ()=>{
   throw error
     }
 }
+
+app.use("/api/role", routes)
 
 app.listen(8800,()=>{
     console.log("server running")

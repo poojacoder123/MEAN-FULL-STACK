@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import role from "./role";
 
 const UserSchema = mongoose.Schema(
     {
@@ -31,11 +32,26 @@ const UserSchema = mongoose.Schema(
             type : String,
             required: false,
             default :"https://img.freepik.com/free-photo/cute-domestic-kitten-sits-window-staring-outside-generative-ai_188544-12519.jpg"
+        },
+        isAdmin :{
+            type : Boolean,
+            default: false
+        },
+        roles : {
+            type : [Schema.Types.ObjectId],
+            required : true,
+            ref : "Role"
         }
+       
 
+    },
+    {
+        timestamps : true
     }
 
 
 
 
 )
+
+export default mongoose.model("User", UserSchema)

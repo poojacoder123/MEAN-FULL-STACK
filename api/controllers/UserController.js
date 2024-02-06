@@ -1,15 +1,17 @@
 import Role from "../models/role.js";
+import { createError } from "../utils/error.js";
+import { CreateSuccess } from "../utils/success.js";
 
 export  const createUser = async (req, res, next) => {
     try {
         if (req.body.role !== null) {
             const newRole = new Role(req.body);
             await newRole.save();
-            return res.send("Role created")
-
+            // return res.send("Role created")
+           return next(CreateSuccess(200, "congrats"))
         }
         else {
-            return res.status(400).send("bad request")
+            return next(createError(500, "error"))
         }
     } catch (error) {
         return res.status(500).send("internal server error")

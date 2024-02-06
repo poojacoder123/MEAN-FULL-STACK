@@ -1,12 +1,13 @@
-import mongoose, { Schema } from "mongoose";
-import role from "./role";
+import mongoose, {Schema} from "mongoose";
+
+
 
 const UserSchema = mongoose.Schema(
     {
-        firestName:
+        firstName:
         {
             type: String,
-            required: true
+            // required: true
 
         },
 
@@ -28,6 +29,12 @@ const UserSchema = mongoose.Schema(
             required: true,
             unique: true
         },
+        password:
+        {
+            type: String,
+            required: true,
+           
+        },
         image : {
             type : String,
             required: false,
@@ -45,13 +52,7 @@ const UserSchema = mongoose.Schema(
        
 
     },
-    {
-        timestamps : true
-    }
-
-
-
-
+    
 )
 
 export default mongoose.model("User", UserSchema)

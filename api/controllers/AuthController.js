@@ -3,7 +3,7 @@ import User from "../models/user.js"
 import bcrypt from 'bcryptjs'
 import { createError } from "../utils/error.js"
 import { CreateSuccess } from "../utils/success.js"
-import  Jwt  from "jsonwebtoken"
+import  jwt  from "jsonwebtoken"
 
 
 export const register = async(req,res,next)=>{
@@ -29,8 +29,10 @@ return next(CreateSuccess(200, "user registered successfully"))
 
 export const login = async(req,res,next)=>{
    try {
-      const user =await  User.findOne({email:req.body.email}).
-      populate("roles", "role");
+      const user =await  User.findOne({email:req.body.email}).populate(
+         "roles", "role"
+      )
+    
       if(!user){
          return  res.status(400).send("user not found");
 
@@ -40,14 +42,22 @@ export const login = async(req,res,next)=>{
          return  res.status(400).send("Incorrect password");
 
       }
-      const token =jwt.sign({
+      const payload =jwt.sign({
          id: user._id,
          isAdmin : user.isAdmin,
          role: user.roles
 
       })
+      const secretKey = 'your-secret-key';
+      const token = Jwt.sign(payload, secretKey);
+      console.log('Generated Token:', token);
+      return token
+      // res.cookie("access_token",token, {httpOnly: true}).status(200).json({
+      //    status: 200,
+      //    message :"login success"
+      // });
       //   return  res.status(202).send("login succesfully");
-      return next(CreateSuccess(200, "user login successfully"))
+      // return next(CreateSuccess(200, "user login successfully"))
    } catch (error) {
       
    }  

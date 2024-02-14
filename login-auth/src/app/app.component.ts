@@ -52,15 +52,7 @@ export class AppComponent implements OnInit {
    
   }
 
-  submit(){
-  console.log(this.addSuperAdmin.value);
-  return
-  this._Service.registerSuperAdmin(this.addSuperAdmin.value).subscribe({
-    next: (res)=>{
-      console.log("super admin registered ", res)
-    }
-  })
-  }
+ 
   login(){
     this._Service.loginSuperAdmin(this.addSuperAdmin.value).subscribe({
       next: (res)=>{

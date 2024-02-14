@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+        <h1>
+            Super Admin Login form
+        </h1>
+        <form action="" [formGroup]="LoginSuperAdmin">
+
+            <div class="form-group mt-5">
+                <label for="">Email</label>
+                <input type="email" class="form-control" formControlName="email">
+                <span *ngIf="LoginSuperAdmin.hasError('required', 'email')"></span>
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="form-control" formControlName="password">
+            </div>
+
+            <button class="btn btn-success mt-5" (click)="login()">Login</button>
+        </form>
+        <a href="/register" class="text-center" style="text-decoration: none;text-align: center;">Dont have account ? click to register</a>
+
+    </div>
+</div>

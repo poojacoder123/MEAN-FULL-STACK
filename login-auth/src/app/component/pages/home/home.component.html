@@ -1,1 +1,19 @@
-<p>home works!</p>
+<!-- <div *ngIf="isDrawan==true">
+    <button>Clear</button>
+    <button>Undo</button>
+    <button>Redo</button>
+     <button (click)="savePNG()">Save as PNG</button>
+    <button>Save as svg</button>
+</div> -->
+
+
+
+<!-- <div style="background-color: #ffffff;"> -->
+    <signature-pad 
+    #signature
+     [options]="signaturePadOptions"
+      (drawStart)="drawStart($event)"
+        (drawEnd)="drawComplete($event)">
+    </signature-pad>
+<!-- </div> -->
+<button (click)="download()">download</button>
